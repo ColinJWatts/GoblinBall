@@ -19,11 +19,12 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate ()
     {
         //state checks
+
         //movement
         UpdateMove();
-        
 
         //animation
+
         //actions
     }
 
