@@ -6,6 +6,9 @@ MonoImporter:
   defaultReferences:
   - _playerGameObject: {fileID: 1250054252003108, guid: 3f071aa08b31c364190068577ed1bd84,
       type: 2}
+  - _goblinManagerGameObject: {instanceID: 0}
+  - _goblinManager: {fileID: 114868030260039944, guid: f2c4ec4a4558bee46b24838acab84911,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

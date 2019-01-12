@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3cecd02b8f594fd4d9f9461c872bb3d7
+timeCreated: 1547325343
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _goblinGameObject: {fileID: 1024931920674450, guid: 84f9d58de9a2fcc4ab1b5a15d2e81956,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
+    //public things
     public Rigidbody2D _rb;
     public float _moveForce = 5;
     public float _jumpForce = 500;
     public Transform _upperLeft;
     public Transform _lowerRight;
+
+    //private things
+    private SpriteRenderer _spriteRenderer;
 
     private bool _initiallized = false;
     public bool IsInitiallized { get { return _initiallized; } }
@@ -23,7 +27,18 @@ public class CharacterBase : MonoBehaviour
 
     void Start ()
     {
-        Init(new BasicInput()); //This line is a test, should be initiallized by the player object later
+        GameObject upperLeft = new GameObject("upperLeft");
+        upperLeft.transform.parent = this.transform;
+        GameObject lowerRight = new GameObject("lowerRight");
+        lowerRight.transform.parent = this.transform;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        upperLeft.transform.position = new Vector3(this.transform.position.x - _spriteRenderer.bounds.extents.x, this.transform.position.y + _spriteRenderer.bounds.extents.y);
+        lowerRight.transform.position = new Vector3(this.transform.position.x + _spriteRenderer.bounds.extents.x, this.transform.position.y - _spriteRenderer.bounds.extents.y);
+
+        _upperLeft = upperLeft.transform;
+        _lowerRight = lowerRight.transform;
     }
 	
     void FixedUpdate ()
@@ -53,7 +68,6 @@ public class CharacterBase : MonoBehaviour
 
         if (jump && Physics2D.OverlapArea(_upperLeft.position, _lowerRight.position, LayerMask.GetMask("Terrain")) != null)
         {
-            Debug.Log("Jump!");
             Jump();
         }
     }

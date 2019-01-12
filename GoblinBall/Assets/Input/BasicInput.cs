@@ -1,8 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicInput : IInputInterface{
+    public string Id
+    {
+        get
+        {
+            return "BasicInput";
+        }
+    }
+
     public float GetHorizontal()
     {
         return Input.GetAxis("Horizontal");

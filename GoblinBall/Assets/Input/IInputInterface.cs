@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IInputInterface
 {
+    string Id { get; }
     float GetHorizontal();
     float GetVertical();
     bool GetJump();
