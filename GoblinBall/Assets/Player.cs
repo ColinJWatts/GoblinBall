@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public void CreateCharacter()
     {
         var characterGameObject = GameObject.Instantiate(_characterPrefab);
-        _character = characterGameObject.GetComponent<CharacterBase>();
+        _character = characterGameObject.GetComponent<TestCharacter>();
         _character.Init(_input);
     }
 

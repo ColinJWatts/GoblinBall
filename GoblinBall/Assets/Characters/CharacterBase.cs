@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBase : MonoBehaviour
+public abstract class CharacterBase : MonoBehaviour
 {
     //public things
     public Rigidbody2D _rb;
@@ -10,6 +10,9 @@ public class CharacterBase : MonoBehaviour
     public float _jumpForce = 500;
     public Transform _upperLeft;
     public Transform _lowerRight;
+
+    //Relevent game stats
+    public uint _health = 500;
 
     //private things
     private SpriteRenderer _spriteRenderer;
@@ -46,6 +49,7 @@ public class CharacterBase : MonoBehaviour
         if (_initiallized)
         {
             //state checks
+            CheckHealth();
 
             //movement
             UpdateMove();
@@ -53,12 +57,15 @@ public class CharacterBase : MonoBehaviour
             //animation
 
             //actions
+            CharacterUpdate();
         }
         else
         {
             Debug.Log("CharacterController not initiallized");
         }
     }
+
+    public virtual void CharacterUpdate() { }
 
     void UpdateMove()
     {
@@ -76,4 +83,14 @@ public class CharacterBase : MonoBehaviour
     {
         _rb.AddForce(Vector2.up * _jumpForce);
     }
+
+    void CheckHealth()
+    {
+        if(_health == 0)
+        {
+            Destroy(transform.gameObject);
+        }
+    }
+
+
 }
