@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Goblin : CharacterBase
 {
-    public override void CharacterUpdate()
+    protected override void CharacterUpdate()
     {
         if (_health > 0)
         {

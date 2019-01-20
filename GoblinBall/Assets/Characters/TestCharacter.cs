@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TestCharacter : CharacterBase
 {
-    public override void CharacterUpdate()
+    protected override void CharacterUpdate()
     {
         base.CharacterUpdate();
     }

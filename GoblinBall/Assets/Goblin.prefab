@@ -102,9 +102,8 @@ MonoBehaviour:
   _rb: {fileID: 50551328725544134}
   _moveForce: 5
   _jumpForce: 500
-  _upperLeft: {fileID: 0}
-  _lowerRight: {fileID: 0}
-  _health: 500
+  _bloodSplatter: {fileID: 1806101719806514, guid: f2753205c64a899498bbbab269513816,
+    type: 2}
 --- !u!212 &212010033204711672
 SpriteRenderer:
   m_ObjectHideFlags: 1

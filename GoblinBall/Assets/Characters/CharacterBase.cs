@@ -8,26 +8,32 @@ public abstract class CharacterBase : MonoBehaviour
     public Rigidbody2D _rb;
     public float _moveForce = 5;
     public float _jumpForce = 500;
-    public Transform _upperLeft;
-    public Transform _lowerRight;
+    public GameObject _bloodSplatter;
+   
+    public Transform UpperLeft { get { return _upperLeft; } }
+    public Transform LowerRight { get { return _lowerRight; } }
+    public bool IsInitiallized { get { return _initiallized; } }
 
     //Relevent game stats
-    public uint _health = 500;
+    public int Health { get { return _health; } }
 
     //private things
-    private SpriteRenderer _spriteRenderer;
-
+    protected SpriteRenderer _spriteRenderer;
+    private Transform _upperLeft;
+    private Transform _lowerRight;
     private bool _initiallized = false;
-    public bool IsInitiallized { get { return _initiallized; } }
+    protected int _health;
     
     private IInputInterface _input;
 
     public void Init(IInputInterface inputInterface)
     {
+        _health = 250;
         _input = inputInterface;
         _initiallized = true;
     }
 
+    //TODO: Refactor
     void Start ()
     {
         GameObject upperLeft = new GameObject("upperLeft");
@@ -42,6 +48,8 @@ public abstract class CharacterBase : MonoBehaviour
 
         _upperLeft = upperLeft.transform;
         _lowerRight = lowerRight.transform;
+
+        CharacterStart();
     }
 	
     void FixedUpdate ()
@@ -65,7 +73,8 @@ public abstract class CharacterBase : MonoBehaviour
         }
     }
 
-    public virtual void CharacterUpdate() { }
+    protected virtual void CharacterUpdate() { }
+    protected virtual void CharacterStart() { }
 
     void UpdateMove()
     {
@@ -86,9 +95,11 @@ public abstract class CharacterBase : MonoBehaviour
 
     void CheckHealth()
     {
-        if(_health == 0)
+        if(_health <= 0)
         {
-            Destroy(transform.gameObject);
+            var bloodSplatter = GameObject.Instantiate(_bloodSplatter);
+            bloodSplatter.transform.position = this.transform.position;
+            Destroy(this.transform.gameObject);
         }
     }
 

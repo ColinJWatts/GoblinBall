@@ -15,6 +15,11 @@ Prefab:
       propertyPath: _rb
       value: 
       objectReference: {fileID: 50528957653962384}
+    - target: {fileID: 0}
+      propertyPath: _bloodSplatter
+      value: 
+      objectReference: {fileID: 1806101719806514, guid: f2753205c64a899498bbbab269513816,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 0}
@@ -111,9 +116,8 @@ MonoBehaviour:
   _rb: {fileID: 50528957653962384}
   _moveForce: 5
   _jumpForce: 500
-  _upperLeft: {fileID: 0}
-  _lowerRight: {fileID: 0}
-  _health: 500
+  _bloodSplatter: {fileID: 1806101719806514, guid: f2753205c64a899498bbbab269513816,
+    type: 2}
 --- !u!212 &212723691637551126
 SpriteRenderer:
   m_ObjectHideFlags: 1
