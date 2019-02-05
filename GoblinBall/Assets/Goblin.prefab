@@ -54,7 +54,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 50551328725544134}
   _moveForce: 5
-  _jumpForce: 500
+  _jumpForce: 100
   _bloodSplatter: {fileID: 1806101719806514, guid: f2753205c64a899498bbbab269513816,
     type: 2}
 --- !u!212 &212010033204711672

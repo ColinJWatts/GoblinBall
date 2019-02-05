@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
     public GameObject _playerGameObject;
-    public List<Player> _players;
+    public List<Player> Players;
 
     public GameObject _goblinManagerGameObject;
-    private GoblinManager _goblinManager;
-	// Use this for initialization
-	void Start ()
+    public GoblinManager GoblinManager;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    // Use this for initialization
+    void Start ()
     {
         var defaultPlayer = GameObject.Instantiate(_playerGameObject);
-        _players.Add(defaultPlayer.GetComponent<Player>());
+        Players.Add(defaultPlayer.GetComponent<Player>());
 
         StartGame();
 	}
@@ -21,7 +36,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         CreateGoblinManager();
-        foreach(Player p in _players)
+        foreach(Player p in Players)
         {
             p.CreateCharacter();
         }
@@ -35,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     void CreateGoblinManager()
     {
-        _goblinManager = GameObject.Instantiate(_goblinManagerGameObject).GetComponent<GoblinManager>();
+        GoblinManager = GameObject.Instantiate(_goblinManagerGameObject).GetComponent<GoblinManager>();
 
     }
 }

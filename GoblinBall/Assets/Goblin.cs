@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Goblin : CharacterBase
 {
+
+    protected override void CharacterStart()
+    {
+        _health = 1000;
+    }
     protected override void CharacterUpdate()
     {
         if (_health > 0)

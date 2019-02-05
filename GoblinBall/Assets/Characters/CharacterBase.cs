@@ -14,6 +14,8 @@ public abstract class CharacterBase : MonoBehaviour
     public Transform LowerRight { get { return _lowerRight; } }
     public bool IsInitiallized { get { return _initiallized; } }
 
+    public bool MovementEnabled { get; set; }
+
     //Relevent game stats
     public int Health { get { return _health; } }
 
@@ -31,6 +33,7 @@ public abstract class CharacterBase : MonoBehaviour
         _health = 250;
         _input = inputInterface;
         _initiallized = true;
+        MovementEnabled = true;
     }
 
     //TODO: Refactor
@@ -60,8 +63,10 @@ public abstract class CharacterBase : MonoBehaviour
             CheckHealth();
 
             //movement
-            UpdateMove();
-
+            if (MovementEnabled)
+            {
+                UpdateMove();
+            }
             //animation
 
             //actions
@@ -103,5 +108,12 @@ public abstract class CharacterBase : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Contains("Goblin") && !GameManager.instance.GoblinManager.IsGrabbed)
+        {
+            GameManager.instance.GoblinManager.GrabGoblin(this);
+        }
+    }
 
 }
