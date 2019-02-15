@@ -12,6 +12,11 @@ public class BasicInput : IInputInterface{
         }
     }
 
+    public bool GetGrab()
+    {
+        return true;
+    }
+
     public float GetHorizontal()
     {
         return Input.GetAxis("Horizontal");

@@ -8,4 +8,5 @@ public interface IInputInterface
     float GetHorizontal();
     float GetVertical();
     bool GetJump();
+    bool GetGrab();
 }

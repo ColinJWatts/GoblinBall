@@ -11,6 +11,11 @@ public class GoblinInput : IInputInterface
         }
     }
 
+    public bool GetGrab()
+    {
+        return false;
+    }
+
     public float GetHorizontal()
     {
         return Random.Range(-1.0f, 1.0f);

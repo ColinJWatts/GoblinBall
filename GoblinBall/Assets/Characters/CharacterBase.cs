@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public abstract class CharacterBase : MonoBehaviour
     public bool IsInitiallized { get { return _initiallized; } }
 
     public bool MovementEnabled { get; set; }
+    public bool GrabEnabled { get; set; }
 
     //Relevent game stats
     public int Health { get { return _health; } }
@@ -24,6 +26,11 @@ public abstract class CharacterBase : MonoBehaviour
     private Transform _upperLeft;
     private Transform _lowerRight;
     private bool _initiallized = false;
+    private Rigidbody2D _body;
+    
+    private int _grabstrength = 100;
+    private bool _hasGoblin = false;
+    private Goblin _grabbedGoblin = null;
     protected int _health;
     
     private IInputInterface _input;
@@ -34,11 +41,15 @@ public abstract class CharacterBase : MonoBehaviour
         _input = inputInterface;
         _initiallized = true;
         MovementEnabled = true;
+        GrabEnabled = true;
+       
     }
 
     //TODO: Refactor
     void Start ()
     {
+        _body = this.GetComponent<Rigidbody2D>();
+
         GameObject upperLeft = new GameObject("upperLeft");
         upperLeft.transform.parent = this.transform;
         GameObject lowerRight = new GameObject("lowerRight");
@@ -80,6 +91,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void CharacterUpdate() { }
     protected virtual void CharacterStart() { }
+    protected virtual void OnDeath() { }
 
     void UpdateMove()
     {
@@ -102,18 +114,52 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if(_health <= 0)
         {
-            var bloodSplatter = GameObject.Instantiate(_bloodSplatter);
-            bloodSplatter.transform.position = this.transform.position;
-            Destroy(this.transform.gameObject);
+            Kill();
         }
+    }
+
+    public void Kill()
+    {
+        var bloodSplatter = GameObject.Instantiate(_bloodSplatter);
+        bloodSplatter.transform.position = this.transform.position;
+        OnDeath();
+
+        Destroy(this.transform.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name.Contains("Goblin") && !GameManager.instance.GoblinManager.IsGrabbed)
+        if(_input.GetGrab() && collision.gameObject.name.Contains("Goblin") && _grabbedGoblin == null && GrabEnabled)
         {
-            GameManager.instance.GoblinManager.GrabGoblin(this);
+            _grabbedGoblin = collision.gameObject.GetComponent<Goblin>();
+            if (!_grabbedGoblin.IsGrabbed)
+            {
+                _grabbedGoblin.GetGrabbed(this);
+                _hasGoblin = true;
+                GrabEnabled = false;
+                new Timer(_grabstrength, DropGoblin);
+            }
+            else
+            {
+                _grabbedGoblin = null;
+            }
         }
+    }
+
+    public void DropGoblin()
+    {
+        if (_hasGoblin && _grabbedGoblin != null)
+        {
+            _grabbedGoblin.Escape();
+            _grabbedGoblin = null;
+            _hasGoblin = false;
+        }
+        new Timer(100, ToggleGrabEnabled);
+    }
+    
+    private void ToggleGrabEnabled()
+    {
+        GrabEnabled = !GrabEnabled;
     }
 
 }

@@ -11,6 +11,11 @@ public class RandomInput : IInputInterface
         }
     }
 
+    public bool GetGrab()
+    {
+        return Random.Range(-1.0f, 100.0f) < 0;
+    }
+
     public float GetHorizontal()
     {
         return Random.Range(-1.0f, 1.0f);
