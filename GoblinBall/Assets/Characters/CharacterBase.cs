@@ -7,8 +7,8 @@ public abstract class CharacterBase : MonoBehaviour
 {
     //public things
     public Rigidbody2D _rb;
-    public float _moveForce = 5;
-    public float _jumpForce = 500;
+    public float _maxSpeed = 5;
+    public float _jumpSpeed = 5;
     public GameObject _bloodSplatter;
    
     public Transform UpperLeft { get { return _upperLeft; } }
@@ -97,7 +97,7 @@ public abstract class CharacterBase : MonoBehaviour
     {
         var hAxis = _input.GetHorizontal();
         var jump = _input.GetJump(); 
-        _rb.AddForce(hAxis * Vector2.right * _moveForce);
+        _rb.velocity = new Vector2(hAxis * _maxSpeed, _rb.velocity.y);
 
         if (jump && Physics2D.OverlapArea(_upperLeft.position, _lowerRight.position, LayerMask.GetMask("Terrain")) != null)
         {
@@ -107,7 +107,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     void Jump()
     {
-        _rb.AddForce(Vector2.up * _jumpForce);
+        _rb.velocity = new Vector2(_rb.velocity.x, _jumpSpeed);
     }
 
     void CheckHealth()
