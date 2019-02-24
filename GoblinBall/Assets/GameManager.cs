@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             {
                 if (TimerList.ContainsKey(i))
                 {
-                    Debug.Log("Removing timer " + i.ToString());
+                    Debug.Log("Removing timer " + i.ToString() + ": " + TimerList[i].Description);
                     
                     TimerList.Remove(i);
                 }

@@ -19,7 +19,7 @@ public class Goblin : CharacterBase
         _grabber = null;
         GrabEnabled = false;
 
-        new Timer(500, Kill);
+        new Timer("Kill Goblin", 500, Kill);
     }
 
     protected override void CharacterUpdate()
@@ -63,6 +63,6 @@ public class Goblin : CharacterBase
         _grabber = null;
         MovementEnabled = true;
         _grabbed = false;
-        new Timer(1, () => goblinBody.AddForce(escapeForce));
+        new Timer("Add Force To Goblin", 1, () => goblinBody.AddForce(escapeForce));
     }
 }

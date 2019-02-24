@@ -137,7 +137,7 @@ public abstract class CharacterBase : MonoBehaviour
                 _grabbedGoblin.GetGrabbed(this);
                 _hasGoblin = true;
                 GrabEnabled = false;
-                new Timer(_grabstrength, DropGoblin);
+                new Timer("Drop Goblin", _grabstrength, DropGoblin);
             }
             else
             {
@@ -154,7 +154,7 @@ public abstract class CharacterBase : MonoBehaviour
             _grabbedGoblin = null;
             _hasGoblin = false;
         }
-        new Timer(100, ToggleGrabEnabled);
+        new Timer("Reenable Grab",100, ToggleGrabEnabled);
     }
     
     private void ToggleGrabEnabled()

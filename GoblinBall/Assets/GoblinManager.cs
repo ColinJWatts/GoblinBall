@@ -22,7 +22,7 @@ public class GoblinManager : MonoBehaviour
     {
 		if(Goblin == null && _spawnTimer == null)
         {
-            _spawnTimer = new Timer(_goblinSpawnTime, CreateGoblin);
+            _spawnTimer = new Timer("Spawn Goblin", _goblinSpawnTime, CreateGoblin);
         }
 	}
 
